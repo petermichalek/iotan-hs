@@ -1,0 +1,76 @@
+//
+//
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+version = '0.1.01'
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+repositories {
+    jcenter()
+    //flatDir {
+    //    dirs 'libs'
+    //}
+}
+
+
+dependencies {
+    compile 'javax.servlet:servlet-api:2.5'
+    compile project(':haystackJava')
+    //compile name: 'iotus-core_2.11-0.1.01'
+    compile files('../iotan-core/target/scala-2.11/iotus-core_2.11-0.1.01.jar')
+
+    //compile project(':haystackJava'), project(':iotusCore')
+    // Use TestNG framework, also requires calling test.useTestNG() below
+    testCompile 'org.testng:testng:6.9.11'
+}
+
+test {
+    useTestNG() {
+        outputDirectory = file("$project.buildDir/reports/testng")
+        useDefaultListeners = true
+    }
+
+    testLogging.showStandardStreams = true;
+
+    testLogging {
+        afterSuite { desc, result ->
+            if (!desc.parent) { // will match the outermost suite
+                println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+            }
+        }
+    }
+}
+
+task wrapper(type: Wrapper) { gradleVersion = '2.13' }
+
+// Maven pom generation
+task createPom {
+    outputs.file("pom.xml")
+    outputs.upToDateWhen { false }
+
+    doLast {
+        pom {
+            project {
+                groupId 'org.iotus'
+                artifactId 'iotus-java'
+                version project.version
+                //version project.version - "-SNAPSHOT"
+            }
+        }.writeTo("pom.xml")
+    }
+}
+compileJava << { tasks.createPom.execute() }
+clean << { tasks.cleanCreatePom.execute() }
+
+// Not sure if this is best way to handle SNAPSHOT versions, but it works for now
+task release(dependsOn: build) << { }
+
+gradle.taskGraph.whenReady {taskGraph ->
+    if (!taskGraph.hasTask(release)) version += "-SNAPSHOT"
+}

@@ -1,0 +1,7 @@
+target
+.gradle/
+.idea/
+WEB-INF/lib/
+build/
+logs/
+out.log

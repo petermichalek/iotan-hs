@@ -1,0 +1,25 @@
+# IoTus Haystack Server Configuration
+# Note: listen port has to be configured via winstone.properties parameter
+#   httpPort=1225
+
+# When installing iotus-hs for the first time, this file should be copied into /opt/iotus/conf/hs.yaml
+# and adjusted to system requirements
+
+# iotus core/kernel url
+# ignored/not used for now, using in-process calls
+# iotusCore: http://localhost:1042
+
+# number of minutes when session expires when HTTP connection inactive
+sessionExpire: 10
+
+# hostname to be displayed in "about" response field "hostname"
+hostname: macdev
+
+# haystack-formated standard timezone where the server is located (e.g. Los_Angeles)
+# this is different from Java or Python timezone ids (e.g. America/Los_Angeles)
+# see http://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html#getAvailableIDs%28%29
+timezone: Los_Angeles
+
+# java log level:
+# info|warning|error etc.
+logLevel: info
