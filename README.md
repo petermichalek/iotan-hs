@@ -130,18 +130,18 @@ Note: pointWrite and invokeAction are not supported
 
 Here is an ops response that specifies details of all supported operations::
 
-    ```bash
-    curl  http://localhost:1225/api/test-project/ops
+```bash
+curl  http://localhost:1225/api/test-project/ops
     
-    ver:"2.0"
-    name,summary
-    "about","Summary information for server"
-    "ops","Operations supported by this server"
-    "formats","Grid data formats supported by this server"
-    "read","Read entity records in database"
-    "nav","Navigate record tree"
-    "hisRead","Read time series from historian"
-    ```
+ver:"2.0"
+name,summary
+"about","Summary information for server"
+"ops","Operations supported by this server"
+"formats","Grid data formats supported by this server"
+"read","Read entity records in database"
+"nav","Navigate record tree"
+"hisRead","Read time series from historian"
+```
     
 It supports the following formats, some of them only in responses:
 
@@ -152,15 +152,15 @@ It supports the following formats, some of them only in responses:
     
 Here is a formats response that specifies details of which read/write mimes are supported:
     
-    ```bash
-    curl  http://localhost:1225/api/test-project/formats
-    ver:"2.0"
-    mime,read,write
-    "text/zinc",M,M
-    "application/json",,M
-    "text/csv",,M
-    "text/plain",M,M
-    ```
+```bash
+curl  http://localhost:1225/api/test-project/formats
+ver:"2.0"
+mime,read,write
+"text/zinc",M,M
+"application/json",,M
+"text/csv",,M
+"text/plain",M,M
+```
 
 
 Examples of haystack standard operations are at:
