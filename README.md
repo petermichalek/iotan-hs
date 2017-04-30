@@ -130,7 +130,7 @@ Note: pointWrite and invokeAction are not supported
 
 Here is an ops response that specifies details of all supported operations::
 
-```bash
+```
 curl  http://localhost:1225/api/test-project/ops
     
 ver:"2.0"
@@ -152,7 +152,7 @@ It supports the following formats, some of them only in responses:
     
 Here is a formats response that specifies details of which read/write mimes are supported:
     
-```bash
+```
 curl  http://localhost:1225/api/test-project/formats
 ver:"2.0"
 mime,read,write
